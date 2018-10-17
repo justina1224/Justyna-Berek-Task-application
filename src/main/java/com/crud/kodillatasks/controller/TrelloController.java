@@ -7,8 +7,11 @@ import com.crud.kodillatasks.domain.TrelloCardDto;
 import com.crud.kodillatasks.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.util.List;
 
+@ApiIgnore
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/v1/trello")
