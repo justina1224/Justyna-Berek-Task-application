@@ -1,7 +1,7 @@
 package com.crud.kodillatasks.service;
 
 import com.crud.kodillatasks.config.AdminConfig;
-import com.crud.kodillatasks.domain.CreatedTrelloCard;
+import com.crud.kodillatasks.domain.CreatedTrelloCardDto;
 import com.crud.kodillatasks.domain.Mail;
 import com.crud.kodillatasks.domain.TrelloBoardDto;
 import com.crud.kodillatasks.domain.TrelloCardDto;
@@ -31,8 +31,8 @@ public class TrelloService {
         return trelloClient.getTrelloBoards();
     }
 
-    public CreatedTrelloCard createTrelloCard(final TrelloCardDto trelloCardDto) {
-        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+    public CreatedTrelloCardDto createTrelloCard(final TrelloCardDto trelloCardDto) {
+        CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
         ofNullable(newCard).ifPresent(card -> emailService.send(new Mail(adminConfig.getAdminMail(),
                 SUBJECT, "New card: " + trelloCardDto.getName() + "has been created on your Trello account")));
