@@ -26,8 +26,10 @@ public class TrelloMapperTestSuite {
         TrelloCardDto trelloCardDto = trelloMapper.mapToCardDto(trelloCard);
         //Then
         Assert.assertNotNull(trelloCardDto);
-        Assert.assertTrue(trelloCardDto.getClass().equals(TrelloCardDto.class));
         Assert.assertEquals("testCard", trelloCardDto.getName());
+        Assert.assertEquals("for test usage", trelloCardDto.getDescription());
+        Assert.assertEquals("1", trelloCardDto.getPos());
+        Assert.assertEquals("1", trelloCardDto.getListId());
     }
 
     @Test
@@ -38,8 +40,10 @@ public class TrelloMapperTestSuite {
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
         //Then
         Assert.assertNotNull(trelloCard);
-        Assert.assertTrue(trelloCard.getClass().equals(TrelloCard.class));
-        Assert.assertEquals("for test usage", trelloCard.getDescription());
+        Assert.assertEquals("testCard", trelloCard.getName());
+        Assert.assertEquals("for test usage", trelloCardDto.getDescription());
+        Assert.assertEquals("1", trelloCardDto.getPos());
+        Assert.assertEquals("1", trelloCardDto.getListId());
     }
 
     @Test
@@ -53,8 +57,9 @@ public class TrelloMapperTestSuite {
         //Then
         Assert.assertNotNull(trelloListDto);
         Assert.assertEquals(1, trelloListDto.size());
-        Assert.assertTrue(trelloListDto.get(0).getClass().equals(TrelloListDto.class));
+        Assert.assertEquals("1", trelloListDto.get(0).getId());
         Assert.assertEquals("testList", trelloListDto.get(0).getName());
+        Assert.assertTrue(trelloListDto.get(0).isClosed());
     }
 
     @Test
@@ -68,8 +73,9 @@ public class TrelloMapperTestSuite {
         //Then
         Assert.assertNotNull(trelloList);
         Assert.assertEquals(1, trelloList.size());
-        Assert.assertTrue(trelloList.get(0).getClass().equals(TrelloList.class));
+        Assert.assertEquals("1", trelloList.get(0).getId());
         Assert.assertEquals("testList", trelloList.get(0).getName());
+        Assert.assertTrue(trelloList.get(0).isClosed());
     }
     @Test
     public void testMapToBoardsDto() {
@@ -83,7 +89,7 @@ public class TrelloMapperTestSuite {
         //Then
         Assert.assertNotNull(trelloBoardsDto);
         Assert.assertEquals(1, trelloBoardsDto.size());
-        Assert.assertTrue(trelloBoardsDto.get(0).getClass().equals(TrelloBoardDto.class));
+        Assert.assertEquals("1", trelloBoardsDto.get(0).getId());
         Assert.assertEquals("testBoard", trelloBoardsDto.get(0).getName());
     }
 
@@ -98,7 +104,7 @@ public class TrelloMapperTestSuite {
         //Then
         Assert.assertNotNull(trelloBoards);
         Assert.assertEquals(1, trelloBoards.size());
-        Assert.assertTrue(trelloBoards.get(0).getClass().equals(TrelloBoard.class));
+        Assert.assertEquals("1", trelloBoards.get(0).getId());
         Assert.assertEquals("testBoard", trelloBoards.get(0).getName());
     }
 }
