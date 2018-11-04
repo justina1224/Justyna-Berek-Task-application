@@ -1,7 +1,10 @@
 package com.crud.kodillatasks.trello.client;
 
+import com.crud.kodillatasks.domain.CreatedTrelloCardDto;
 import com.crud.kodillatasks.domain.TrelloBoardDto;
+import com.crud.kodillatasks.domain.TrelloCardDto;
 import com.crud.kodillatasks.trello.config.TrelloConfig;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,13 +42,10 @@ public class TrelloClientTest {
 
     @Test
     public void shouldFetchTrelloBoards() throws URISyntaxException {
-
         // Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
-
         URI uri = new URI("http://test.com/members/justyna874/boards?key=test&token=test&fields=name,id&lists=all");
-
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
         //When
@@ -58,9 +58,8 @@ public class TrelloClientTest {
         assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
     }
 
-    /*@Test
-    public void shouldCreateTask() throws URISyntaxException{
-
+    @Test
+    public void shouldCreateTask() throws URISyntaxException {
         //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto(
                 "Test task",
@@ -88,7 +87,7 @@ public class TrelloClientTest {
     }
 
     @Test
-    public void shouldReturnEmptyList() throws URISyntaxException{
+    public void shouldReturnEmptyList() throws URISyntaxException {
         //Given
         URI uri = new URI("http://test.com/members/justyna874/boards?key=test&token=test&fields=name,id&lists=all");
         when(restTemplate.postForObject(uri, null, TrelloBoardDto[].class)).thenReturn(null);
@@ -97,6 +96,6 @@ public class TrelloClientTest {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
         //Then
-        Assert.assertEquals(true,trelloBoards.isEmpty());
-    }*/
+        Assert.assertEquals(true, trelloBoards.isEmpty());
+    }
 }
