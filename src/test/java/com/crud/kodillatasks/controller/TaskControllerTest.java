@@ -165,7 +165,10 @@ public class TaskControllerTest {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
-        when(dbService.saveTask(task)).thenReturn(task);
+     when(taskMapper.mapToTask(any())).thenReturn(task);
+     when(dbService.saveTask(task)).thenReturn(task);
+     when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
+
 
         //When&Then
         mockMvc.perform(put("/v1/task/updateTask")
