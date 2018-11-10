@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailScheduler {
 
-    private static final String SUBJECT = "Tasks: Once a day email";
+    private static final String SUBJECT = "Trello";
 
     @Autowired
     private SimpleEmailService emailService;
@@ -23,10 +23,10 @@ public class EmailScheduler {
     private AdminConfig adminConfig;
 
     //@Scheduled(fixedDelay = 10000)
-    //@Scheduled(cron = "0 0 0 10 * * *")
+    @Scheduled(cron = "*/60 * * * * *")
     public void sendInformationEmail() {
         long size = taskRepository.count();
-        emailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT,
+        emailService.sendTrelloMime(new Mail(adminConfig.getAdminMail(), SUBJECT,
                 "Currently in database you got: " + size + (size == 1 ?" task":" tasks")));
     }
 }
